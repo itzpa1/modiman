@@ -48,7 +48,7 @@ export const StartPage: React.FC = () => {
         await navigator.share({
           title: "MODIMAN",
           text: "Play MODIMAN - The ultimate maze game!",
-          url: window.location.origin
+          url: "https://modiman-xi.vercel.app/"
         });
       } catch (error) {
         if ((error as Error).name !== 'AbortError') {

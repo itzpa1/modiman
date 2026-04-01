@@ -62,7 +62,7 @@ export const WinLossPage: React.FC = () => {
         const shareData = {
           files: [file],
           title: "MODIMAN Score",
-          text: `I scored ${score} in MODIMAN! 🏆 Can you beat me? \nPlay here: ${window.location.origin}`,
+          text: `I scored ${score} in MODIMAN! 🏆 Can you beat me? \nPlay here: https://modiman-xi.vercel.app/`,
         };
 
         // Try to share with files
