@@ -205,11 +205,11 @@ export const StartPage: React.FC = () => {
 
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 md:flex flex-col items-center gap-1 w-full p-2 hidden">
         <p className="text-[10px] md:text-[8px] text-white opacity-80 text-center">
-          Developed by <a href="https://github.com/codeitzpa1" target="_blank" rel="noopener noreferrer" className="text-[#FFFF00] hover:underline">code.itzpa1</a>
+          Developed by <a href="https://github.com/itzpa1" target="_blank" rel="noopener noreferrer" className="text-[#FFFF00] hover:underline">code.itzpa1</a>
         </p>
-        <a 
-          href="https://github.com/codeitzpa1" 
-          target="_blank" 
+        <a
+          href="https://github.com/itzpa1/modiman"
+          target="_blank"
           rel="noopener noreferrer"
           className="text-[10px] md:text-[8px] text-[#FFFF00] hover:scale-105 transition-transform flex items-center gap-2 drop-shadow-[0_0_5px_rgba(255,255,0,0.5)]"
         >
