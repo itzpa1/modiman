@@ -1,5 +1,5 @@
 import React from "react";
-import { LuX, LuTwitter, LuLink as LinkIcon } from "react-icons/lu";
+import { LuX, LuTwitter, LuLink as LinkIcon, LuDownload } from "react-icons/lu";
 import { FaWhatsapp, FaSms } from "react-icons/fa";
 import { Button } from "./Button";
 
@@ -7,9 +7,10 @@ interface ShareSheetProps {
   isOpen: boolean;
   onClose: () => void;
   score?: number;
+  screenshotUrl?: string | null;
 }
 
-export const ShareSheet: React.FC<ShareSheetProps> = ({ isOpen, onClose, score }) => {
+export const ShareSheet: React.FC<ShareSheetProps> = ({ isOpen, onClose, score, screenshotUrl }) => {
   if (!isOpen) return null;
 
   const shareText = `I scored ${score || 0} points in MODIMAN! 🏆 Can you beat me? Play here: https://modiman-xi.vercel.app/`;
@@ -23,14 +24,21 @@ export const ShareSheet: React.FC<ShareSheetProps> = ({ isOpen, onClose, score }
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText("https://modiman-xi.vercel.app/");
-    // You could add a toast here if available
     alert("Link copied to clipboard!");
+  };
+
+  const handleDownloadScreenshot = () => {
+    if (!screenshotUrl) return;
+    const a = document.createElement("a");
+    a.href = screenshotUrl;
+    a.download = "modiman_score.png";
+    a.click();
   };
 
   return (
     <div className="fixed inset-0 z-50 flex items-end justify-center bg-black/80 backdrop-blur-sm sm:items-center p-4 animate-in fade-in duration-200">
       <div className="w-full max-w-sm rounded-t-2xl sm:rounded-2xl border-4 border-[#0000FF] bg-black p-6 shadow-[0_0_30px_#0000FF] slide-in-from-bottom-full sm:slide-in-from-bottom-10">
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-4 flex items-center justify-between">
           <h2 className="text-xl text-[#FFFF00] shadow-[#FFFF00] drop-shadow-[0_0_5px_rgba(255,255,0,0.8)]">
             SHARE SCORE
           </h2>
@@ -42,8 +50,25 @@ export const ShareSheet: React.FC<ShareSheetProps> = ({ isOpen, onClose, score }
           </button>
         </div>
 
+        {/* Screenshot preview */}
+        {screenshotUrl && (
+          <div className="mb-4 flex flex-col items-center gap-2">
+            <img
+              src={screenshotUrl}
+              alt="Score screenshot"
+              className="w-full rounded-xl border-2 border-[#0000FF]/50 object-contain max-h-48"
+            />
+            <button
+              onClick={handleDownloadScreenshot}
+              className="flex items-center gap-2 text-[10px] text-[#FFFF00] hover:underline hover:text-white transition-colors"
+            >
+              <LuDownload size={14} /> SAVE SCREENSHOT
+            </button>
+          </div>
+        )}
+
         {score !== undefined && (
-          <div className="mb-6 text-center text-sm text-white">
+          <div className="mb-4 text-center text-sm text-white">
             I SCORED <span className="text-[#FFFF00]">{score}</span> POINTS!
           </div>
         )}
@@ -94,7 +119,7 @@ export const ShareSheet: React.FC<ShareSheetProps> = ({ isOpen, onClose, score }
           </button>
         </div>
 
-        <div className="mt-8">
+        <div className="mt-6">
           <Button variant="secondary" className="w-full text-xs py-3" onClick={onClose}>
             CANCEL
           </Button>

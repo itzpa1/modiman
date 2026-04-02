@@ -11,10 +11,8 @@ export const router = createBrowserRouter([
     children: [
       { index: true, Component: StartPage },
       { path: "game", Component: GamePage },
-      { path: "win", Component: WinLossPage },
-      { path: "loss", Component: WinLossPage },
       { path: "win-loss", Component: WinLossPage },
-      { path: "*", Component: () => <div>Not Found</div> },
+      { path: "*", Component: StartPage }, // redirect unknowns to start
     ],
   },
 ]);

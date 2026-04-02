@@ -30,15 +30,23 @@ export const StartPage: React.FC = () => {
   }, [isMuted]);
 
   const handleStartGame = () => {
+    // Stop StartPage audio before navigating to game
+    const prev = (window as any).activeAudio as HTMLAudioElement | undefined;
+    if (prev) { prev.pause(); prev.currentTime = 0; }
+    (window as any).activeAudio = null;
     navigate('/game', { state: { character: selectedCharacter } });
   };
 
   const handleCharacterChange = (characterId: string) => {
     setSelectedCharacter(characterId);
+    // Stop any currently playing audio first
+    const prev = (window as any).activeAudio as HTMLAudioElement | undefined;
+    if (prev) { prev.pause(); prev.currentTime = 0; }
     if (!isMuted) {
       const audio = new Audio(CHARACTERS.find(c => c.id === characterId)?.audio);
       audio.play().catch(e => console.error("Audio playback failed:", e));
-      (window as any).bgAudio = audio;
+      (window as any).activeAudio = audio;
+      (window as any).bgAudio = audio; // keep bgAudio alias for compat
     }
   };
 
@@ -203,7 +211,7 @@ export const StartPage: React.FC = () => {
 
       </div>
 
-      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 md:flex flex-col items-center gap-1 w-full p-2 hidden">
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 w-full p-2">
         <p className="text-[10px] md:text-[8px] text-white opacity-80 text-center">
           Developed by <a href="https://github.com/itzpa1" target="_blank" rel="noopener noreferrer" className="text-[#FFFF00] hover:underline">code.itzpa1</a>
         </p>
