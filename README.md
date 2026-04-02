@@ -2,9 +2,9 @@
 
 <img src="./public/favicon.png" alt="Modiman Logo" width="120" height="120" style="border-radius: 20px;" />
 
-# MODIMAN
+# MODIMAN 
 
-### 🕹️ The Ultimate Political Arcade Maze Game
+### Khela Hobe 🕹️
 
 *Eat dots. Dodge opponents. Score high. Just for fun.*
 
